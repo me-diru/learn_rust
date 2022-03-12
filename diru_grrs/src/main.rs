@@ -21,7 +21,7 @@ fn main() -> Result<()> {
 
     let content = std::fs::read_to_string(&args.path).expect("Couldn't read this file");
     
-    grrs::find_matches(&content, &args.pattern, std::io::stdout()).with_context(|| "error finding matches")?;
+    diru_grrs::find_matches(&content, &args.pattern, std::io::stdout()).with_context(|| "error finding matches")?;
 
     Ok(())
 }
@@ -33,7 +33,7 @@ fn main() -> Result<()> {
 #[test]
 fn find_a_match() {
     let mut writer = Vec::new();
-    let result = grrs::find_matches("lorem ipsum\ndolor sit amet", "lorem", &mut writer).with_context(|| "error writing matches");
+    let result = diru_grrs::find_matches("lorem ipsum\ndolor sit amet", "lorem", &mut writer).with_context(|| "error writing matches");
     match result {
        
         Ok(_) =>  assert_eq!(writer, b"lorem ipsum\n"),
